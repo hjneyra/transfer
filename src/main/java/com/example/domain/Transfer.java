@@ -2,10 +2,28 @@ package com.example.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Transfer {
+	@Id
+	@Column(name = "id")
+	private Long numeroOperacion;
+	
 	private Double monto;
+
+	@ManyToOne
+	@JoinColumn(name = "origen")
 	private Account origen;
+	
+	@ManyToOne
+	@JoinColumn(name = "destino")
 	private Account destino;
+
 	private Date fecha;
 
 	public Double getMonto() {
@@ -38,6 +56,14 @@ public class Transfer {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public Long getNumeroOperacion() {
+		return numeroOperacion;
+	}
+
+	public void setNumeroOperacion(Long numeroOperacion) {
+		this.numeroOperacion = numeroOperacion;
 	}
 
 }
