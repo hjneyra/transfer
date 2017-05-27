@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.domain.Account;
-import com.example.repository.IAccountRepository;
+import com.example.repository.AccountRepository;
 import com.example.repository.service.TransferService;
 
 @Controller
@@ -24,7 +24,7 @@ public class TransferApplication {
 	TransferService transferService;
 
 	@Autowired
-	IAccountRepository accountRepository;
+	AccountRepository accountRepository;
 	
 	@PostConstruct
 	void init() {
@@ -47,7 +47,7 @@ public class TransferApplication {
 	@RequestMapping("/cuentas")
 	@ResponseBody
 	Collection<Account> listarCuentas() {
-		return accountRepository.getAll();
+		return accountRepository.findAll();
 	}
 
 	public static void main(String[] args) {

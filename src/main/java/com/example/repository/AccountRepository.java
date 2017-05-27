@@ -1,32 +1,18 @@
 package com.example.repository;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 import com.example.domain.Account;
 
-//@Component
-public class AccountRepository implements IAccountRepository {
-	Map<String, Account> accounts = new HashMap<>();
+public interface AccountRepository extends CrudRepository<Account, String> {
 
-	@Override
-	public void save(Account account) {
-		accounts.put(account.getNumero(), account);
-	}
-	@Override
-	public Account get(String numero) {
-		return accounts.get(numero);
-	}
+	@Query("SELECT a FROM Account a WHERE a.numero = ?1")
+	Account findByNumero(String numero);
 
-	@Override
-	public Collection<Account> getAll() {
-		return accounts.values();
-	}
-	@Override
-	public void remove(String numero) {
-		accounts.remove(numero);
-	}
+	// select a.* from account a
+	@Query("SELECT a FROM Account a")
+	Collection<Account> findAll();
 }
