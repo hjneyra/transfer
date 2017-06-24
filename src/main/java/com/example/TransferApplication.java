@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.domain.Account;
@@ -50,6 +51,12 @@ public class TransferApplication {
 	@ResponseBody
 	Collection<Account> listarCuentas() {
 		return accountRepository.findAll();
+	}
+
+	@RequestMapping("/cuenta")
+	@ResponseBody
+	Account listaCuenta(@RequestParam String numero) {
+		return accountRepository.findOne(numero);
 	}
 
 	public static void main(String[] args) {
